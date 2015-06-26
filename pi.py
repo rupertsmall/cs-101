@@ -1,3 +1,5 @@
+# calculate pi
+
 from math import sin, cos, sqrt
 
 epsilon = 0.00000001
