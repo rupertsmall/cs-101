@@ -89,9 +89,38 @@
 <h3>
 <a id="sin-and-cos" class="anchor" href="#sin-and-cos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sin() and Cos()</h3>
 
-<p>If you're itching to write a function called sin.py or if you really want to figure out a way for a computer with no special functions or libraries to calculate sin(number) then you will want to look into the <a href="http://mathworld.wolfram.com/TaylorSeries.html">Taylor Series</a> of the sin() function.</p>
+<p>If you're itching to write a function called sin.py or if you really want to figure out a way for a computer with no special functions or libraries to calculate sin(<em>number</em>) then you will want to look into the <a href="http://mathworld.wolfram.com/TaylorSeries.html">Taylor Series</a> of the sin() function. For sin( ) you're going to have something like</p>
 
-<p>(work in progress..)</p>
+<pre><code>sinX = X - X**3/6 + X**5/120 - X**7/5040 + X**9/362880 - X**11/39916800
+</code></pre>
+
+<p>with a trick or two to make sure that <em>X</em> is close as possible to zero:</p>
+
+<pre><code>X %= 2*pi
+ if X &gt; pi:
+        X = -X + pi
+ elif X &lt; -pi:
+        X = -X - pi
+</code></pre>
+
+<p>Note that the further <em>X</em> is from zero, the worse the approximation. Can you think of a way to alter the code to allow <em>X</em> to be even closer to zero ?</p>
+
+<p>For calculating cos(<em>X</em>) without using library functions (<a href="https://github.com/rupertsmall/cs-101/blob/master/cos.py">cos.py</a>) you can use the same Taylor expansion method used for sin(<em>X</em>):</p>
+
+<pre><code>cosX = 1 - X**2/2 + X**4/24 - X**6/720 + X**8/40320 - X**10/3628800
+</code></pre>
+
+<p>and again you should find a way to make sure <em>X</em> is as close to zero as possible:</p>
+
+<pre><code>X = abs(float(save))           # take abs() because cos(X) = cos(-X)
+X %= 2*pi
+if X &gt; pi:                     # in this case cos(X) = cos(2pi - X)
+        X = 2*pi - X
+</code></pre>
+
+<p>Can you improve on the accuracy of the approximations by altering the code to bound <em>X</em> by an even smaller number?</p>
+
+<p>(TBC. Work In Progress)</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rupertsmall/cs-101">CS-101</a> is maintained by <a href="https://github.com/rupertsmall">rupertsmall</a>.</span>
