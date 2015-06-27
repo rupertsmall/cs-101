@@ -22,14 +22,14 @@
       <h3>
 <a id="cs-101" class="anchor" href="#cs-101" aria-hidden="true"><span class="octicon octicon-link"></span></a>CS-101</h3>
 
-<p>The basics of coding involve learning to do the simple things in life. From scratch. When learning to code it's therefore not just important to know which library command takes the square root of a number, or which method appends an item onto the end of a list. No, you must learn how to do those things <em>from scratch</em>. Welcome to Level 0.</p>
+<p>The basics of coding involve learning to do the simple things in life. From scratch. When learning to code it's therefore not just important to know which library command takes the square root of a number, or which method appends an item onto the end of a list. No, you must learn how to do those things <em>with your bare hands</em>. Welcome to Level 0.</p>
 
 <h3>
 <a id="square-roots" class="anchor" href="#square-roots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Square Roots</h3>
 
 <p>Imagine you are a computer living peacefully in Computer Land and imagine that your skills are extremely limited: for loops, while loops, multiplication, division (etc) you can do no problem. But in the Computer Land you are in you have no predefined functions or libraries. How do you find the square root of a number? You use a root finding algorithm such as the <a href="http://mathworld.wolfram.com/NewtonsMethod.html">Newton-Rhapson method</a></p>
 
-<p>Find the order of magnitude of the answer to seed your guess</p>
+<p>In <a href="https://github.com/rupertsmall/cs-101/blob/master/sqrt.py">sqrt.py</a> the job is firstly to find the order of magnitude of the answer to seed your guess</p>
 
 <pre><code># order of magnitude for seed guess
  p = float(argv[1])
@@ -43,17 +43,55 @@
  guess = 10**orderOfMagnitude
 </code></pre>
 
-<p>Implement the root finding algorithm</p>
+<p>and then implement the root finding algorithm</p>
 
 <pre><code># calculate sqrt() 
  while error &gt; epsilon:
           guess = .5*guess + .5*p/guess
           error = abs(p-guess**2)
-
- print '\n',guess, guess**2,'\n'
 </code></pre>
 
-<p>// work in progress.. //</p>
+<h3>
+<a id="any-root" class="anchor" href="#any-root" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<em>Any</em> Root</h3>
+
+<p>Using the same idea's as for the square root it is possible to use a root finding algorithm to find the <em>n</em>'th root of a number (<a href="https://github.com/rupertsmall/cs-101/blob/master/nroot.py">nroot.py</a>) now with <em>n</em> being anything, even a negative <a href="https://en.wikipedia.org/?title=Real_number">real number</a>! This time the seeding of the guess is slightly different:</p>
+
+<pre><code>orderOfMagnitude = 1
+ while remainder &gt;= 10:
+          remainder = remainder/10
+          orderOfMagnitude += 1
+
+ orderOfMagnitude /= n
+ guess = 10**orderOfMagnitude
+</code></pre>
+
+<p>and the iterative process for finding better and better approximations must be changed to:</p>
+
+<pre><code># calculate n'th root 
+ while error &gt; epsilon:
+          guess = ((n-1)/n)*guess + (p/n)/guess**(n-1)
+          error = abs(p-guess**n)
+</code></pre>
+
+<h3>
+<a id="factorial" class="anchor" href="#factorial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Factorial</h3>
+
+<p>A classic question for introducing <a href="https://en.wikipedia.org/wiki/Recursion_%28computer_science%29">recursion</a> is how to calculate the factorial of <em>n</em>? It's an interesting question because the answer can be expressed recursively (<a href="https://github.com/rupertsmall/cs-101/blob/master/factorial.py">factorial.py</a>). On the other hand you don't have to express it recursively if you really don't want to. The recursive solution looks like this:</p>
+
+<pre><code>def factorial(n):
+        if n==1:
+                return n
+        else:
+                return n*factorial(n-1)
+</code></pre>
+
+<h3>
+<a id="sin-and-cos" class="anchor" href="#sin-and-cos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sin() and Cos()</h3>
+
+<p>If you're itching to write a function called sin.py or if you really want to figure out a way for a computer with no special functions or libraries to calculate sin(number) then you will want to look into the <a href="http://mathworld.wolfram.com/TaylorSeries.html">Taylor Series</a> of the sin() function.</p>
+
+<p>(work in progress..)</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rupertsmall/cs-101">CS-101</a> is maintained by <a href="https://github.com/rupertsmall">rupertsmall</a>.</span>
