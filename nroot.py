@@ -22,7 +22,7 @@ else:
  orderOfMagnitude /= n
  guess = 10**orderOfMagnitude
 
-# calculate sqrt() 
+# calculate n'th root 
  while error > epsilon:
           guess = ((n-1)/n)*guess + (p/n)/guess**(n-1)
           error = abs(p-guess**n)
